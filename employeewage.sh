@@ -12,7 +12,8 @@
    fi
 
    
-   #store the daily wage along with the total wage
+    # Store the daily wage alog with the total wage in dictionary
+   declare -A dailyWage
    # CONSTANTS FOR THE PROGRAM
    IS_PART_TIME=1;
    IS_FULL_TIME=2;
@@ -21,10 +22,10 @@
    NUM_WORKING_DAYS=20;
 
    # VARIABLES
-   totalEmpHrs=0;
-   totalWorkingDays=0;
+     totalEmpHrs=0;
+     totalWorkingDays=0;
 
-   function getWorkingHours( ) {
+     function getWorkingHours( ) {
      case $1 in
          $IS_FULL_TIME)
             workHrs=8;;
@@ -34,12 +35,14 @@
             workHrs=0;;
      esac
      }
- 
+
      while (( $(( $totalEmpHrs < $MAX_HRS_IN_MONTH )) && $(( $totalWorkingDays < $NUM_WORKING_DAYS )) ))
      do
         ((totalWorkingDays++))
-     getWorkingHours $((RANDOM%3))
-         totalEmpHrs=$(($totalEmpHrs+$workHrs))
-         dailyWage[$totalWorkingDays]=$(($workHrs*$EMP_RATE_PER_HR))
+        getWorkingHours $((RANDOM%3))
+        totalEmpHrs=$(($totalEmpHrs+$workHrs))
+        dailyWage[" Day $totalWorkingDays"]=$(($workHrs*$EMP_RATE_PER_HR))
      done
-         totalEmpHrs=$(($totalEmpHrs*$EMP_RATE_PER_HR))
+        totalEmpHrs=$(($totalEmpHrs*$EMP_RATE_PER_HR));  
+
+
